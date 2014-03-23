@@ -47,11 +47,11 @@
         (original-test-end   test-end))
     (dynamic-wind
       (lambda ()
-        ;(set! test-begin (constantly #t))
+        (set! test-begin (constantly #t))
         (set! test-end   (constantly #t)))
       proc
       (lambda ()
-        ;(set! test-begin original-test-begin)
+        (set! test-begin original-test-begin)
         (set! test-end original-test-end)))))
 
 (define (run-iteration iteration tests seeds)
@@ -70,7 +70,7 @@
            (or (eq? status 'FAIL) (eq? status 'ERROR))))
        results))
 
-(define (finish/failures test-group tests seeds iteration)
+(define (finish/failures tests seeds iteration)
   (let* ((original-handler (current-test-handler))
          (decorating-handler (lambda (status expect expr info)
                                (cond
@@ -91,7 +91,7 @@
     (let loop ((iteration 1) (seeds (generator)))
       (let ((results (run-iteration iteration tests seeds)))
         (if (failed-tests? results)
-            (finish/failures test-group tests seeds iteration)
+            (finish/failures tests seeds iteration)
             (if (>= iteration iteration-count)
                 (finish/success seeds tests)
                 (loop (add1 iteration) (generator))))))))
