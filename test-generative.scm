@@ -6,7 +6,8 @@
 
 (define current-test-generative-iterations (make-parameter 100))
 
-
+;;TODO: currently test-group-filter/remove doesn't work with groups inside test-generative
+;; test-filter/remove does work however
 
 ;; just do the bare minimum to evaluate the expresion
 ;; this has been extracte from test's code
