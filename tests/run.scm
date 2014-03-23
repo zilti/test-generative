@@ -4,7 +4,7 @@
 (test-group "group around"
 
 
-            (test-group "with failing probably assertions"
+            (test-group "probably failing"
                         (test-generative ((number (gen-fixnum))
                                           (string (gen-string-of (gen-char #\a #\z))))
                                          (test-assert (> (string-length string) 30))
