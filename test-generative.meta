@@ -1,0 +1,6 @@
+((synopsis "Allows quickcheck like testing for pure code with the test egg")
+ (author "David Krentzlin")
+ (category testing)
+ (license "GPLv3")
+ (depends test)
+ (test-depends test))
