@@ -9,8 +9,8 @@
 ;;TODO: currently test-group-filter/remove doesn't work with groups inside test-generative
 ;; test-filter/remove does work however
 
-;; just do the bare minimum to evaluate the expresion
-;; this has been extracte from test's code
+;; just do the bare minimum to evaluate the expression
+;; this has been extracted from test's code
 (define (apply-test expect expr info)
   (define (assq-ref ls key . o)
     (cond ((assq key ls) => cdr)
@@ -39,7 +39,7 @@
               (append `((exception . ,e) (trace . ,get-call-chain)) info))))))
 
 
-(define (with-stubbed-environment proc)
+(define (with-stubbed-environment thunk)
   ;; HERE BE DRAGONS
   ;; this is the hacky part of the library
   ;; if you have groups there will be calls to test-begin and test-end that does some housekeeping
@@ -50,7 +50,7 @@
       (lambda ()
         (set! test-begin (constantly #t))
         (set! test-end   (constantly #t)))
-      proc
+      thunk
       (lambda ()
         (set! test-begin original-test-begin)
         (set! test-end original-test-end)))))
