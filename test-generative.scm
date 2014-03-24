@@ -2,7 +2,7 @@
   ((test-generative run-tests-with-generator) current-test-generative-iterations)
   (import chicken scheme)
 
-  (use test (only srfi-1 any reverse!) (only data-structures constantly))
+  (use test (only srfi-1 any reverse! zip) (only data-structures constantly))
 
 (define current-test-generative-iterations (make-parameter 100))
 
@@ -71,7 +71,7 @@
            (or (eq? status 'FAIL) (eq? status 'ERROR))))
        results))
 
-(define (finish/failures tests seeds iteration)
+(define (finish/failures tests seed-names seeds iteration)
   (let* ((original-handler (current-test-handler))
          (decorating-handler (lambda (status expect expr info)
                                (cond
@@ -79,7 +79,7 @@
                                  (original-handler status expect expr info))
                                 (else
                                  (original-handler status expect expr (cons `(values (iteration . ,iteration)
-                                                                                     (seeds . ,seeds))
+                                                                                     (seeds . ,(zip seed-names seeds)))
                                                                             info)))))))
     (parameterize ((current-test-handler decorating-handler))
       (apply tests seeds))))
@@ -87,12 +87,12 @@
 (define (finish/success seeds tests)
   (apply tests seeds))
 
-(define (run-tests-with-generator tests generator)
+(define (run-tests-with-generator tests seed-names generator)
   (let ((iteration-count (current-test-generative-iterations)))
     (let loop ((iteration 1) (seeds (generator)))
       (let ((results (run-iteration iteration tests seeds)))
         (if (failed-tests? results)
-            (finish/failures tests seeds iteration)
+            (finish/failures tests seed-names seeds iteration)
             (if (>= iteration iteration-count)
                 (finish/success seeds tests)
                 (loop (add1 iteration) (generator))))))))
@@ -103,6 +103,7 @@
      (run-tests-with-generator
       (lambda (?var ...)
         ?body ...)
+      (list (quote ?var) ...)
       (lambda ()
         (list (?gen) ...))))))
 

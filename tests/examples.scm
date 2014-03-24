@@ -18,4 +18,10 @@
             (test "bar" #t #t))
 
 
+(test-generative ((the-number (lambda () (random 100))))
+   (test-assert "it's numeric"  (number? the-number))
+   (test-assert "it's positive" (positive? the-number))
+   (test-assert "it's smaller that 50" (< the-number 50)))
+
+
 (test-exit)
