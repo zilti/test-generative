@@ -66,10 +66,10 @@
       (reverse! test-results))))
 
 (define (failed-tests? results)
-  (any (lambda (result)
-         (let ((status (car result)))
-           (or (eq? status 'FAIL) (eq? status 'ERROR))))
-       results))
+  (any
+   (lambda (result)
+     (member (car result) '(FAIL ERROR)))
+   results))
 
 (define (finish/failures tests seed-names seeds iteration)
   (let* ((original-handler (current-test-handler))
