@@ -2,5 +2,6 @@
  (author "David Krentzlin")
  (category testing)
  (license "GPLv3")
- (depends test)
- (test-depends test))
+ (csc-options "-O2" "-d0" "-no-warnings")
+ (dependencies test srfi-1)
+ (components (extension test-generative (source "test-generative.scm"))))

@@ -1,8 +1,14 @@
-(module test-generative
-  ((test-generative run-tests-with-generator) current-test-generative-iterations)
-  (import chicken scheme)
+(module test-generative (test-generative run-tests-with-generator current-test-generative-iterations)
 
-  (use test (only srfi-1 any reverse! zip) (only data-structures constantly))
+(import scheme)
+(import chicken.base)
+(import chicken.string)
+(import chicken.format)
+(import chicken.condition)
+
+(import test)
+(import (only srfi-1 any reverse! zip))
+
 
 (define current-test-generative-iterations (make-parameter 100))
 

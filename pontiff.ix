@@ -1,0 +1,20 @@
+(pontiff :name test-generative
+         :version {0 0 5}
+         :pontiff-version {0 1 0}
+         :synopsis "quickcheck-like generators for test"
+         :authors ["David Krentzlin"]
+         :license "GPLv3"
+         :repository (pontiff:repository :name test-generative :vcs git :url "https://github.com/alicemaz/test-generative")
+         :category test
+         :tags []
+         :source-dir "."
+         :test-dir ""
+         :csc-flags ["-optimize-level" "2" "-debug-level" "0" "-no-warnings"]
+         :cc clang
+         :ld lld
+         :artifacts [(pontiff:library :name test-generative :root test-generative)]
+         :tests []
+         :dependencies []
+         :resolver alice
+         :egg-dependencies [test srfi-1]
+         :egg-resolver chicken-install)

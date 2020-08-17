@@ -1,9 +1,0 @@
-(define version "0.0.4")
-
-(compile -d0 -O2 -J -s test-generative.scm)
-(compile -d0 -O2 -s test-generative.import.scm)
-
-(install-extension
- 'test-generative
- '("test-generative.so" "test-generative.import.so")
- `((version ,version)))
