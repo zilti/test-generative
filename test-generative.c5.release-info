@@ -1,4 +1,4 @@
 (repo git "git://github.com/alicemaz/test-generative.git")
 (uri targz "https://github.com/alicemaz/test-generative/archive/v{egg-release}.tar.gz")
 
-(release "0.0.5")
+(release "0.0.6")
