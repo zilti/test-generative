@@ -1,8 +1,9 @@
 (pontiff :name test-generative
          :version {0 0 5}
          :pontiff-version {0 1 0}
-         :synopsis "quickcheck-like generators for test"
+         :synopsis "quickcheck-like testing for test"
          :authors ["David Krentzlin"]
+         :maintainers ["alice maz"]
          :license "GPLv3"
          :repository (pontiff:repository :name test-generative :vcs git :url "https://github.com/alicemaz/test-generative")
          :category test

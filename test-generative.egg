@@ -1,5 +1,6 @@
 ((synopsis "Allows quickcheck like testing for pure code with the test egg")
  (author "David Krentzlin")
+ (maintainer "alice maz")
  (category testing)
  (license "GPLv3")
  (csc-options "-O2" "-d0" "-no-warnings")
