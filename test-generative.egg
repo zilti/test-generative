@@ -3,6 +3,5 @@
  (maintainer "alice maz")
  (category testing)
  (license "GPLv3")
- (csc-options "-O2" "-d0" "-no-warnings")
  (dependencies test srfi-1)
- (components (extension test-generative (source "test-generative.scm"))))
+ (components (extension test-generative (source "test-generative.scm") (csc-options "-O2" "-d0" "-no-warnings"))))
