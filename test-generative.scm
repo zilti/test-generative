@@ -1,6 +1,7 @@
 (module test-generative (test-generative run-tests-with-generator current-test-generative-iterations)
 
 (import scheme)
+(import scheme.base)
 (import chicken.base)
 (import chicken.string)
 (import chicken.format)
@@ -95,13 +96,15 @@
 
 (define (run-tests-with-generator tests seed-names generator)
   (let ((iteration-count (current-test-generative-iterations)))
-    (let loop ((iteration 1) (seeds (generator)))
-      (let ((results (run-iteration iteration tests seeds)))
-        (if (failed-tests? results)
-            (finish/failures tests seed-names seeds iteration)
-            (if (>= iteration iteration-count)
-                (finish/success seeds tests)
-                (loop (add1 iteration) (generator))))))))
+    (let loop ((iteration 1)
+               (seeds (generator)))
+      (if (or (>= iteration iteration-count)
+             (eof-object? seeds))
+          (let ((results (run-iteration iteration tests seeds)))
+            (if (failed-tests? results)
+                (finish/failures tests seed-names seeds iteration)
+                (loop (add1 iteration) (generator))))
+          (finish/success seeds tests)))))
 
 (define-syntax test-generative
   (syntax-rules ()
